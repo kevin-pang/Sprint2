@@ -9,7 +9,6 @@
 </head>
 <body>
 	<h1>New Teaching Session</h1>
-	<form method="get" action="submit">
 	<table>
 		<tfoot>
 			<tr>
@@ -22,54 +21,40 @@
 		</tfoot>
 		<tr>
 			<td>Title:</td>
-			<td><input type="text" name="title"></td>
+			<td>${ts.title}</td>
 		</tr>
 		<tr>
 			<td>Date:</td>
-			<td><input type="date" name="startDate"></td>
+			<td>${ts.startDate}</td>
 		</tr>
 		<tr>
 			<td>Time:</td>
-			<td><input type="time" name="startTime"v alue="24 Hour Format"></td>
+			<td>${ts.startTime}</td>
 		</tr>
 		<tr>
 			<td style="width: 212px;">Duration:</td>
-			<td>1<input type="range" name="points" min="1" max="10">10 (Hours)</td>
+			<td>${ts.duration}</td>
 		</tr>
 		<tr>
 			<td>Repeat Frequency:</td>
-			<td><select name="repeatfreq" align="left">
-				<option value="1">Once</option>
-				<option value="2">Twice</option>
-			    </select>
-			</td>
+			<td>${ts.repeatFrequency}</td>
 		</tr>
 		<tr>
 			<td>Lecturer:</td>
-			<td><select name="lecturer" align="left">
-					<option value="Professor John">Professor John</option>
-					<option value="Professor May">Professor May</option>
-					<option value="Professor Ken">Professor Ken</option>
-					<option value="Professor Kevin">Professor Kevin</option>
-				</select></td>
+			<td>${ts.lecturer}</td>
 		</tr>
 		<tr>
 			<td>Max Attendance:</td>
-			<td><input type="number" name="max" min="1" max="200"> (Min 1 Max 200)</td>
+			<td>${ts.maxAttendance}</td>
 		</tr>
 		<tr>
 			<td>Compulsory:</td>
-			<td><input type="checkbox" name="compulsory"></td>
+			<td>${ts.compulsory}</td>
 		</tr>
 		<tr>
 			<td>Venue:</td>
-			<td><select name="venue" align="left">
-				<option value="lab">Lab</option>
-				<option value="tutorial">Tutorial Room</option>
-				</select>		
-			</td>
+			<td>${ts.venue}</td>
 		</tr>
 	</table>
-	</form>
 </body>
 </html>

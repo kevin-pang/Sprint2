@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+	private static TeachingSession ts;
 	private ArrayList<TeachingSession> sessions = new ArrayList<TeachingSession>();
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -60,7 +60,7 @@ public class HomeController {
 			@RequestParam(value="compulsory", required = true) String compulsory,
 			@RequestParam(value="venue", required = true) String venue)
 	{
-		TeachingSession ts = new TeachingSession(title, 
+		ts = new TeachingSession(title, 
 												startDate, 
 												startTime, 
 												Double.parseDouble(duration), 
@@ -78,7 +78,24 @@ public class HomeController {
 		logger.info(String.valueOf(ts.getMaxAttendance()));
 		logger.info(String.valueOf(ts.isCompulsory()));
 		logger.info(ts.getVenue());
+		logger.info(ts.toString());
 		sessions.add(ts);
+		return "NewTeachingSessionConfirm";
+	}
+	
+	@RequestMapping(value = "/NewTeachingSessionConfirm", method = RequestMethod.GET)
+	public String list(ModelMap model) {
+		logger.info("Listing session");
+		/*TeachingSession ts = new TeachingSession("test1",
+												 "12/12/2013", 
+												 "1000", 
+												 3.0, 
+												 3, 
+												 "Tan", 
+												 10, 
+												 true, 
+												 "lab");*/
+		model.put("ts",ts);
 		return "NewTeachingSessionConfirm";
 	}
 	
