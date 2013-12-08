@@ -55,6 +55,8 @@ public class HomeController {
 		timetables.add(new Timetable("CS Year 3", new ArrayList<TeachingSession>()));
 		timetables.add(new Timetable("CS Year 4", new ArrayList<TeachingSession>()));
 		
+		sessions.add(new TeachingSession("test1", "12/12/2013", "1000", 3.0, "Weekly", "Tan", 10, true, "lab"));
+		
 		duration = new TreeMap<String, String>();
 		duration.put("4", "4 Hours");	
 		duration.put("3", "3 Hours");
@@ -171,7 +173,7 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("TestTimetable");
 
-		mav.addObject("timetable", tth.getTimetable());
+		mav.addObject("timetable", tth.getTimetableTitle());
 		return mav;
 	}
 	
@@ -240,57 +242,6 @@ public class HomeController {
 		model.put("ts",ts);
 		return "NewTeachingSessionConfirm";
 	}*/
-	@RequestMapping(value="/testing")
-	public ModelAndView testPage() {
-		ModelAndView mav = new ModelAndView("test", "ts", new TeachingSession());
-		/*Map<String, String> duration = new HashMap<String, String>();
-				
-		duration.put("3", "3 Hours");
-		duration.put("2", "2 Hours");
-		duration.put("1", "1 Hour");*/
-		mav.addObject("durationMap", duration);
-		mav.addObject("repeatFrequencyMap", repeatFrequency);
-		mav.addObject("lecturerMap", lecturer);
-		return mav;
-	}
 	
-	@RequestMapping(value="/process-test")
-	public ModelAndView processTest(@ModelAttribute TeachingSession ts) {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("testResult");
-
-		modelAndView.addObject("ts", ts);
-
-		return modelAndView;
-	}
-	
-	@RequestMapping(value="/test-form")
-	public ModelAndView test2Page() {
-		return new ModelAndView("test2", "test-entity", new TeachingSession());
-	}
-	@RequestMapping(value="/process-test2")
-	public ModelAndView processTest2(@ModelAttribute TeachingSession teachingSession) {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("test2-result-page");
-		
-		modelAndView.addObject("pers", teachingSession);
-		
-		return modelAndView;
-	}
-	
-	@RequestMapping(value="/person-form")
-	public ModelAndView personPage() {
-		return new ModelAndView("person-page", "person-entity", new Person());
-	}
-	
-	@RequestMapping(value="/process-person")
-	public ModelAndView processPerson(@ModelAttribute Person person) {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("person-result-page");
-		
-		modelAndView.addObject("pers", person);
-		
-		return modelAndView;
-	}
 	
 }

@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-Timetable title is ${timetable.title}
+Timetable title is ${timetable}
 </body>
 </html>
