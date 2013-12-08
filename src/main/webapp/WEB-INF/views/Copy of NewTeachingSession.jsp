@@ -23,7 +23,7 @@
 		</tfoot>
 		<tr>
 			<td>Title:</td>
-			<td><input type="text" name="title" ></td>
+			<td><input type="text" name="title"></td>
 		</tr>
 		<tr>
 			<td>Date:</td>
@@ -31,7 +31,7 @@
 		</tr>
 		<tr>
 			<td>Time:</td>
-			<td><input type="time" name="startTime" value="24 Hour Format"></td>
+			<td><input type="time" name="startTime"v alue="24 Hour Format"></td>
 		</tr>
 		<tr>
 			<td style="width: 212px;">Duration:</td>

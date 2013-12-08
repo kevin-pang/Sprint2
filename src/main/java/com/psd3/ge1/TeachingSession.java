@@ -7,14 +7,14 @@ public class TeachingSession {
 	private String startDate;
 	private String startTime;
 	private double duration;
-	private int repeatFrequency;
+	private String repeatFrequency;
 	private String lecturer;
 	private int maxAttendance;
 	private boolean compulsory;
 	private String venue;
 
 	public TeachingSession(String title, String startDate, String startTime,
-			double duration, int repeatFrequency, String lecturer,
+			double duration, String repeatFrequency, String lecturer,
 			int maxAttendance, boolean compulsory, String venue) {
 		super();
 		this.title = title;
@@ -26,6 +26,11 @@ public class TeachingSession {
 		this.maxAttendance = maxAttendance;
 		this.compulsory = compulsory;
 		this.venue = venue;
+	}
+	
+	public TeachingSession()
+	{
+		
 	}
 
 	public String getTitle() {
@@ -60,11 +65,11 @@ public class TeachingSession {
 		this.duration = duration;
 	}
 
-	public int getRepeatFrequency() {
+	public String getRepeatFrequency() {
 		return repeatFrequency;
 	}
 
-	public void setRepeatFrequency(int repeatFrequency) {
+	public void setRepeatFrequency(String repeatFrequency) {
 		this.repeatFrequency = repeatFrequency;
 	}
 
