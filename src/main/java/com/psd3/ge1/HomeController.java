@@ -96,20 +96,6 @@ public class HomeController {
 		flag = true;
 	}
 
-	/*@RequestMapping("/loginSubmit")
-	public String login(
-			@RequestParam(value="username", required = true) String username, 
-			@RequestParam(value="password", required = true) String password) 
-	{
-		if(username.toLowerCase().equals("admin")) {
-			return "/AdminMenu";
-		}
-		else if(username.toLowerCase().equals("user")) {
-			return "/User";
-		}
-		else
-			return "/home";
-	}*/
 
 	@RequestMapping("/login2Submit")
 	public String login2(@ModelAttribute User user)
@@ -123,7 +109,7 @@ public class HomeController {
 		
 		for(int x = 0; x < sessions.size(); x++)
 		{
-			if(sessions.get(x).getLecturer().toLowerCase().equals(user.getUsername().toLowerCase()))
+			if(sessions.get(x).getLecturer().replaceAll("\\s+","").toLowerCase().equals(user.getUsername().replaceAll("\\s+","").toLowerCase()))
 			{
 				lecturerSessionGlobal.add(sessions.get(x));
 			}
@@ -138,7 +124,7 @@ public class HomeController {
 		{			
 			for (User student : timetables.get(i).getStudentsList()) 
 			{
-				if(student.getUsername().toLowerCase().equals(user.getUsername().toLowerCase()))
+				if(student.getUsername().replaceAll("\\s+","").toLowerCase().equals(user.getUsername().replaceAll("\\s+","").toLowerCase()))
 				{
 					timetableGlobal = timetables.get(i);
 					return "redirect:populateTimetable";
@@ -159,26 +145,11 @@ public class HomeController {
 	{
 		return new ModelAndView("LecturerViewTimetable", "teachSessions", lecturerSessionGlobal);
 	}
-	/*@RequestMapping("/login2Submit")
-	public String login2(@ModelAttribute User user)
-	{
-		if(user.getUsername().toLowerCase().equals("admin")) {
-			return "/AdminMenu";
-		}
-		else if(user.getUsername().toLowerCase().equals("user")) {
-			return "/User";
-		}
-		else
-			return "/home";
-	}*/
+	
 	@RequestMapping(value="/CreateNewTeachingSessionForm")
 	public ModelAndView createNewTeachingSession() {
 		ModelAndView mav = new ModelAndView("CreateNewTeachingSession", "ts", new TeachingSession());
-		/*Map<String, String> duration = new HashMap<String, String>();
-
-		duration.put("3", "3 Hours");
-		duration.put("2", "2 Hours");
-		duration.put("1", "1 Hour");*/
+	
 		mav.addObject("durationMap", duration);
 		mav.addObject("repeatFrequencyMap", repeatFrequency);
 		mav.addObject("lecturerMap", lecturer);
@@ -251,28 +222,18 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("AddTeachingSession", "tsh", new TeachingSessionHolder());
 
 		Map<String, String> tsMap = new HashMap<String,String>();
-		//Map<TeachingSession, String> tsMap = new HashMap<TeachingSession, String>();
+		
 		for (TeachingSession ts : sessions) 
 		{
-			tsMap.put(ts.getTitle(), ts.getTitle()+" "+ ts.getStartDate() + " " + ts.getStartTime());
-			//			tsMap.put(ts, ts.getTitle()+" "+ ts.getStartDate() + " " + ts.getStartTime());
+			if(!timetableGlobal.getTeachingSessions().contains(ts))
+				tsMap.put(ts.getTitle(), ts.getTitle()+" "+ ts.getStartDate() + " " + ts.getStartTime());
+			
 		}
 
-		//logger.info(tsMap.toString());
 		mav.addObject("tsMap", tsMap);
-		//mav.addObject("timetableMap", lecturer);
-		//mav.addObject("venueMap", venue);
 		return mav;
 	}		
-	/*@RequestMapping(value="/AddSession2")
-	public ModelAndView AddTeachingSession2(@ModelAttribute Timetable tt) {
 
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("TestTimetable");
-
-		mav.addObject("timetable", tt);
-		return mav;
-	}*/
 	@RequestMapping(value="/AddSession2")
 	public ModelAndView AddTeachingSession2(@ModelAttribute TeachingSessionHolder tsh) {
 
@@ -285,7 +246,8 @@ public class HomeController {
 			}
 
 		}
-		timetableGlobal.addTeachingSession(tstemp);
+		if(tstemp != null)
+			timetableGlobal.addTeachingSession(tstemp);
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("TestTimetable");
@@ -294,82 +256,13 @@ public class HomeController {
 		return mav;
 	}
 
-	/*@RequestMapping(value="/AddSession")
-	public ModelAndView AddTeachingSession(@ModelAttribute TimeTableHolder tth) {
 
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("TestTimetable");
-
-		mav.addObject("timetable", tth.getTimetableTitle());
-		return mav;
-	}*/
-
-	/*@RequestMapping(value="/CreateSession")
-	public String createNewTS(@ModelAttribute TeachingSession ts) {
-		logger.info(ts.toString());
-		sessions.add(ts);
-		logger.info(sessions.get(0).toString());
-		return "/AdminMenu";
-	}*/
 
 	@RequestMapping("/NewTeachingSession")
 	public String NewTeachingSession(Model model)
 	{
 		return "NewTeachingSession";
-	}
-
-	/*@RequestMapping("/NewTeachingSessionSubmit")
-	public String NewTeachingSessionSubmit(
-			@RequestParam(value="title", required = true) String title, 
-			@RequestParam(value="startDate", required = true) String startDate,
-			@RequestParam(value="startTime", required = true) String startTime,
-			@RequestParam(value="duration", required = true) String duration,
-			@RequestParam(value="repeatfreq", required = true) String repeatFrequency,
-			@RequestParam(value="lecturer", required = true) String lecturer,
-			@RequestParam(value="maxAttendance", required = true) String maxAttendance,
-			@RequestParam(value="compulsory", required = true) String compulsory,
-			@RequestParam(value="venue", required = true) String venue)
-	{
-		ts = new TeachingSession(title, 
-												startDate, 
-												startTime, 
-												Double.parseDouble(duration), 
-												Integer.parseInt(repeatFrequency), 
-												lecturer, Integer.parseInt(maxAttendance), 
-												Boolean.parseBoolean(compulsory),						
-												venue);
-
-		logger.info(ts.getTitle());
-		logger.info(ts.getStartDate());
-		logger.info(ts.getStartTime());
-		logger.info(String.valueOf(ts.getDuration()));
-		logger.info(String.valueOf(ts.getRepeatFrequency()));
-		logger.info(ts.getLecturer());
-		logger.info(String.valueOf(ts.getMaxAttendance()));
-		logger.info(String.valueOf(ts.isCompulsory()));
-		logger.info(ts.getVenue());
-		logger.info(ts.toString());
-		sessions.add(ts);
-		return "redirect:/NewTeachingSessionConfirm";
-	}*/
-
-	/*@RequestMapping(value = "/NewTeachingSessionConfirm", method = RequestMethod.POST)
-	public String list(ModelMap model) {
-		logger.info("Listing session");
-		TeachingSession ts = new TeachingSession("test1",
-												 "12/12/2013", 
-												 "1000", 
-												 3.0, 
-												 3, 
-												 "Tan", 
-												 10, 
-												 true, 
-												 "lab");
-		logger.info(ts.toString());
-		model.put("ts",ts);
-		return "NewTeachingSessionConfirm";
-	}*/
+	}	
 
 
 }
