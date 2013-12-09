@@ -1,5 +1,6 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/xml" prefix="x"%><%@taglib
-	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><%@ page
+<%@taglib uri="http://java.sun.com/jsp/jstl/xml" prefix="x"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page
 	language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
@@ -10,7 +11,7 @@
 <title>Timetable</title>
 </head>
 <body>
-<h1>Timetable Details</h1>
+<h1></h1>
 <form:form method="POST" commandName="timetable" action="AddTeachingSession">
 	<table>
 		<tr>

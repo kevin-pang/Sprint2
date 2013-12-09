@@ -13,14 +13,20 @@ public class Timetable
 	
 	private List<TeachingSession> teachingSessions;
 	
-	public Timetable()
-	{
-		teachingSessions = new ArrayList<TeachingSession>();
-	}
-	public Timetable(String title, List<TeachingSession> teachingSessions) {
+	private List<User> studentsList;
+	
+
+	
+	public Timetable(String title, List<TeachingSession> teachingSessions,
+			List<User> studentsList) {
 		super();
 		this.title = title;
 		this.teachingSessions = teachingSessions;
+		this.setStudentsList(studentsList);
+	}
+	public Timetable()
+	{
+		teachingSessions = new ArrayList<TeachingSession>();
 	}
 	
 	
@@ -38,6 +44,15 @@ public class Timetable
 	}
 	public void addTeachingSession(TeachingSession ts) {
 		this.teachingSessions.add(ts);
+	}
+	public List<User> getStudentsList() {
+		return studentsList;
+	}
+	public void setStudentsList(List<User> studentsList) {
+		this.studentsList = studentsList;
+	}
+	public void addStudent(User student) {
+		this.studentsList.add(student);
 	}
 	@Override
 	public String toString() {

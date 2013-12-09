@@ -38,6 +38,7 @@ public class HomeController {
 	Map<String, String> lecturer;
 	Map<String, String> venue;
 	Timetable timetableGlobal;
+	List<TeachingSession> lecturerSessionGlobal;
 	boolean flag = false;
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -55,20 +56,23 @@ public class HomeController {
 	}
 
 	private void populate() {
-		timetables.add(new Timetable("CS Year 1", new ArrayList<TeachingSession>()));
-		timetables.add(new Timetable("CS Year 2", new ArrayList<TeachingSession>()));
-		timetables.add(new Timetable("CS Year 3", new ArrayList<TeachingSession>()));
-		timetables.add(new Timetable("CS Year 4", new ArrayList<TeachingSession>()));
+		timetables.add(new Timetable("CS Year 1", new ArrayList<TeachingSession>(), new ArrayList<User>()));
+		timetables.add(new Timetable("CS Year 2", new ArrayList<TeachingSession>(),new ArrayList<User>()));
+		timetables.add(new Timetable("CS Year 3", new ArrayList<TeachingSession>(),new ArrayList<User>()));
+		timetables.add(new Timetable("CS Year 4", new ArrayList<TeachingSession>(),new ArrayList<User>()));
 
-		sessions.add(new TeachingSession("test1", "12/12/2013", "1000", 3.0, "Weekly", "Tan", 10, true, "lab"));
-		sessions.add(new TeachingSession("test2", "12/12/2013", "1000", 3.0, "Weekly", "Tan", 10, true, "lab"));
+		sessions.add(new TeachingSession("test1", "12/12/2013", "1000", 3.0, "Weekly", "TanCC", 10, true, "lab"));
+		sessions.add(new TeachingSession("test2", "15/12/2013", "1000", 3.0, "Weekly", "KohKK", 10, true, "lab"));
+		int i = 1;
 		for (Timetable tt : timetables) {
 			for (TeachingSession ts : sessions) {
 				tt.addTeachingSession(ts);
-			}
+			} 
+			tt.addStudent(new User("student"+i,"student"+i));
+			i++;
 
 		}
-
+		
 		duration = new TreeMap<String, String>();
 		duration.put("4", "4 Hours");	
 		duration.put("3", "3 Hours");
@@ -109,6 +113,54 @@ public class HomeController {
 
 	@RequestMapping("/login2Submit")
 	public String login2(@ModelAttribute User user)
+	{		
+		timetableGlobal = null;
+		lecturerSessionGlobal = new ArrayList<TeachingSession>();
+
+		if(user.getUsername().toLowerCase().equals("admin")) {
+			return "/AdminMenu";
+		}
+		
+		for(int x = 0; x < sessions.size(); x++)
+		{
+			if(sessions.get(x).getLecturer().toLowerCase().equals(user.getUsername().toLowerCase()))
+			{
+				lecturerSessionGlobal.add(sessions.get(x));
+			}
+		}
+		
+		if(lecturerSessionGlobal.size() != 0)
+		{
+			return "redirect:populateTimetableLecturer";
+		}
+		
+		for(int i = 0; i < timetables.size(); i++)
+		{			
+			for (User student : timetables.get(i).getStudentsList()) 
+			{
+				if(student.getUsername().toLowerCase().equals(user.getUsername().toLowerCase()))
+				{
+					timetableGlobal = timetables.get(i);
+					return "redirect:populateTimetable";
+				}
+			}
+		}
+		
+		return "login2";
+	}
+	@RequestMapping("populateTimetable")
+	public ModelAndView populateTimetable()
+	{
+		return new ModelAndView("ViewTimetable", "tt", timetableGlobal);
+	}
+	
+	@RequestMapping("populateTimetableLecturer")
+	public ModelAndView populateTimetableLecturer()
+	{
+		return new ModelAndView("LecturerViewTimetable", "teachSessions", lecturerSessionGlobal);
+	}
+	/*@RequestMapping("/login2Submit")
+	public String login2(@ModelAttribute User user)
 	{
 		if(user.getUsername().toLowerCase().equals("admin")) {
 			return "/AdminMenu";
@@ -118,7 +170,7 @@ public class HomeController {
 		}
 		else
 			return "/home";
-	}
+	}*/
 	@RequestMapping(value="/CreateNewTeachingSessionForm")
 	public ModelAndView createNewTeachingSession() {
 		ModelAndView mav = new ModelAndView("CreateNewTeachingSession", "ts", new TeachingSession());

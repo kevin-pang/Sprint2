@@ -11,10 +11,8 @@
 <H2>
 <a href="CreateNewTeachingSessionForm">Create New Session</a></br>
 <a href="ChooseTimetable">Add to Timetable</a></br>
-<a href="/login/">Logout</a></br>
-<a href="/login/">Logout</a>
 </H2>
 
-<a href="/ge1/login/">Logout</a>
+<a href="/ge1/">Logout</a>
 </body>
 </html>
