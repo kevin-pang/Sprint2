@@ -37,6 +37,7 @@ public class HomeController {
 	Map<String, String> repeatFrequency;
 	Map<String, String> lecturer;
 	Map<String, String> venue;
+	Timetable timetableGlobal;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -56,6 +57,13 @@ public class HomeController {
 		timetables.add(new Timetable("CS Year 4", new ArrayList<TeachingSession>()));
 		
 		sessions.add(new TeachingSession("test1", "12/12/2013", "1000", 3.0, "Weekly", "Tan", 10, true, "lab"));
+		sessions.add(new TeachingSession("test2", "12/12/2013", "1000", 3.0, "Weekly", "Tan", 10, true, "lab"));
+		for (Timetable tt : timetables) {
+			for (TeachingSession ts : sessions) {
+				tt.addTeachingSession(ts);
+			}
+						
+		}
 		
 		duration = new TreeMap<String, String>();
 		duration.put("4", "4 Hours");	
@@ -123,9 +131,9 @@ public class HomeController {
 	
 	@RequestMapping(value="/confirmCreate")
 	public ModelAndView processNewTS(@ModelAttribute TeachingSession ts) {
-		logger.info(ts.toString());
+		//logger.info(ts.toString());
 		sessions.add(ts);
-		logger.info(sessions.get(0).toString());
+		//logger.info(sessions.get(0).toString());
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("CreateNewTeachingSessionConfirm");
@@ -150,23 +158,82 @@ public class HomeController {
 			timetableMap.put(timetable.getTitle(), timetable.getTitle());
 		}
 		
-		logger.info(timetableMap.toString());
+		//logger.info(timetableMap.toString());
 	    mav.addObject("timetableMap", timetableMap);
 		//mav.addObject("timetableMap", lecturer);
 		//mav.addObject("venueMap", venue);
 		return mav;
+	}		
+	@RequestMapping(value="/AddSession")
+	public ModelAndView AddTeachingSession(@ModelAttribute TimeTableHolder tth) {
+		timetableGlobal = null;
+		for (Timetable tt : timetables) 
+		{
+			if(tt.getTitle().equals(tth.getTimetableTitle()))
+			{
+				timetableGlobal = tt;
+				break;
+			}
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("TestTimetable");
+
+		mav.addObject("timetable", timetableGlobal);
+		return mav;
 	}
 	
-	/*@RequestMapping(value="/ChooseTimetable")
-	public ModelAndView ChooseTimetable() {
-		ModelAndView mav = new ModelAndView("ChooseTimetable", "tth", new TimeTableHolder());
+	@RequestMapping(value="/AddTeachingSession")
+	public ModelAndView AddTeachingSession() {
+		//logger.info(timetableGlobal.toString());
 		
+		ModelAndView mav = new ModelAndView("AddTeachingSession", "tsh", new TeachingSessionHolder());
 		
-		mav.addObject("venueMap", venue);
+		Map<String, String> tsMap = new HashMap<String,String>();
+		//Map<TeachingSession, String> tsMap = new HashMap<TeachingSession, String>();
+		for (TeachingSession ts : sessions) 
+		{
+			tsMap.put(ts.getTitle(), ts.getTitle()+" "+ ts.getStartDate() + " " + ts.getStartTime());
+//			tsMap.put(ts, ts.getTitle()+" "+ ts.getStartDate() + " " + ts.getStartTime());
+		}
+		
+		//logger.info(tsMap.toString());
+	    mav.addObject("tsMap", tsMap);
+		//mav.addObject("timetableMap", lecturer);
+		//mav.addObject("venueMap", venue);
+		return mav;
+	}		
+	/*@RequestMapping(value="/AddSession2")
+	public ModelAndView AddTeachingSession2(@ModelAttribute Timetable tt) {
+				
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("TestTimetable");
+
+		mav.addObject("timetable", tt);
 		return mav;
 	}*/
+	@RequestMapping(value="/AddSession2")
+	public ModelAndView AddTeachingSession2(@ModelAttribute TeachingSessionHolder tsh) {
+				
+		TeachingSession tstemp = null;
+		for (TeachingSession ts : sessions) 
+		{
+			if(ts.getTitle().equals(tsh.getTitle()))
+			{
+				tstemp = ts;
+			}
+					
+		}
+		timetableGlobal.addTeachingSession(tstemp);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("TestTimetable");
+
+		mav.addObject("timetable", timetableGlobal);
+		return mav;
+	}
 	
-	@RequestMapping(value="/AddSession")
+	/*@RequestMapping(value="/AddSession")
 	public ModelAndView AddTeachingSession(@ModelAttribute TimeTableHolder tth) {
 		
 		
@@ -175,7 +242,7 @@ public class HomeController {
 
 		mav.addObject("timetable", tth.getTimetableTitle());
 		return mav;
-	}
+	}*/
 	
 	/*@RequestMapping(value="/CreateSession")
 	public String createNewTS(@ModelAttribute TeachingSession ts) {
