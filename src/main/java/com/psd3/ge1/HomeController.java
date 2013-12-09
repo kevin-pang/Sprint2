@@ -44,7 +44,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model) {
-		while(flag)
+		while(!flag)
 		{
 			populate();
 		}
@@ -147,7 +147,11 @@ public class HomeController {
 
 		return modelAndView;
 	}
-
+	@RequestMapping(value="/AdminMenu")
+	public String redirectAdminMenu(Model model)
+	{
+		return "AdminMenu";
+	}
 	@RequestMapping(value="/ChooseTimetable")
 	public ModelAndView ChooseTimetable() {
 		ModelAndView mav = new ModelAndView("ChooseTimetable", "tth", new TimeTableHolder());
