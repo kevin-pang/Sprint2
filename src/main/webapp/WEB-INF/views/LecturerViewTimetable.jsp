@@ -9,7 +9,6 @@
 </head>
 <body>
 	<h1>Timetable</h1>
-	<a href="/ge1/">Logout</a>
 	<h2>Teaching Sessions</h2>
 	<table border="1">
 		<tr>
@@ -32,7 +31,8 @@
 				<td>${ts.repeatFrequency}</td>
 			</tr>
 		</c:forEach>
-
 	</table>
+	<a href="/ge1/">Logout</a>
+
 </body>
 </html>

@@ -26,7 +26,7 @@
 				</c:choose>
 			</tr>
 			<tr>
-				<td colspan="2"><input value="Submit" type="submit"></td>
+				<td colspan="2"><input value="Submit" type="submit"><input type="button" onclick="history.back();" value="Back"></td>
 			</tr>
 		</table>
 	</form:form>

@@ -5,11 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>View Timetable</title>
 </head>
 <body>
 	<h1>Timetable: ${tt.title}</h1>
-	<a href="/ge1/">Logout</a>
 	<h2>Teaching Sessions</h2>
 	<table border="1">
 		<tr>
@@ -32,7 +31,9 @@
 				<td>${ts.lecturer}</td>
 			</tr>
 		</c:forEach>
-
 	</table>
+	
+		<a href="/ge1/">Logout</a>
+	
 </body>
 </html>

@@ -8,17 +8,19 @@
 <title>Choose Timetable</title>
 </head>
 <body>
+	<h1>Select timetable for which year</h1>
 	<form:form method="POST" commandName="tth" action="AddSession">
-	<table>
-		<tr>
-			<td>Timetable:</td>
-			<td><form:select path="timetableTitle" items="${timetableMap}"></form:select></td>
-<%-- 			<td><form:select path="timetableTitle" items="${venueMap}"></form:select></td> --%>
-		</tr>
-		<tr>
-					<td colspan="2"><input value="Submit" type="submit"></td>
-				</tr>
-	</table>
+		<table>
+			<tr>
+				<td>Timetable:</td>
+				<td><form:select path="timetableTitle" items="${timetableMap}"></form:select></td>
+				<%-- 			<td><form:select path="timetableTitle" items="${venueMap}"></form:select></td> --%>
+			</tr>
+			<tr>
+				<td colspan="2"><input value="Submit" type="submit"><input
+					type="button" onclick="history.back();" value="Back"></td>
+			</tr>
+		</table>
 	</form:form>
 </body>
 </html>

@@ -9,7 +9,6 @@
 </head>
 <body>
 	<h1>New Teaching Session</h1>
-	<a href="/ge1/">Logout</a>
 	<form:form method="POST" commandName="ts" action="confirmCreate">
 		<table>
 			<tbody>
@@ -55,10 +54,13 @@
 							items="${venueMap}"></form:select></td>
 				</tr>
 				<tr>
-					<td colspan="2"><input value="Submit" type="submit"></td>
+					<td colspan="2"><input value="Submit" type="submit"><input type="button" onclick="history.back();" value="Back"></td>
+					
 				</tr>
 			</tbody>
 		</table>
 	</form:form>
+	<a href="/ge1/">Logout</a>
+
 </body>
 </html>

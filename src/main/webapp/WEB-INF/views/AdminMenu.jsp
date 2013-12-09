@@ -8,10 +8,8 @@
 </head>
 <body>
 <H1>Admin Menu</H1>
-<H2>
-<a href="CreateNewTeachingSessionForm">Create New Session</a></br>
-<a href="ChooseTimetable">Add to Timetable</a></br>
-</H2>
+<a href="CreateNewTeachingSessionForm">Create New Session</a><br/>
+<a href="ChooseTimetable">Add to Timetable</a><br/><br/>
 
 <a href="/ge1/">Logout</a>
 </body>

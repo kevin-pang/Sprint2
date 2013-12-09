@@ -61,8 +61,8 @@ public class HomeController {
 		timetables.add(new Timetable("CS Year 3", new ArrayList<TeachingSession>(),new ArrayList<User>()));
 		timetables.add(new Timetable("CS Year 4", new ArrayList<TeachingSession>(),new ArrayList<User>()));
 
-		sessions.add(new TeachingSession("test1", "12/12/2013", "1000", 3.0, "Weekly", "TanCC", 10, true, "lab"));
-		sessions.add(new TeachingSession("test2", "15/12/2013", "1000", 3.0, "Weekly", "KohKK", 10, true, "lab"));
+		sessions.add(new TeachingSession("PSD1", "12/12/2013", "1000", 3.0, "Weekly", "TanCC", 10, true, "lab"));
+		sessions.add(new TeachingSession("PL1", "15/12/2013", "1000", 3.0, "Weekly", "KohKK", 10, true, "lab"));
 		int i = 1;
 		for (Timetable tt : timetables) {
 			for (TeachingSession ts : sessions) {

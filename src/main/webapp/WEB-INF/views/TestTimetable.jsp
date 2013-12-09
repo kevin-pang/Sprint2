@@ -8,10 +8,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Timetable</title>
+<title>Add Teaching Session</title>
 </head>
 <body>
-<h1></h1>
+<h1>Add Teaching Session</h1>
 <form:form method="POST" commandName="timetable" action="AddTeachingSession">
 	<table>
 		<tr>
@@ -26,7 +26,7 @@
 				</c:forEach></td>
 		</tr>
 		<tr>
-		<td colspan="2"><input value="Add Teaching Session" type="submit"></td>
+		<td colspan="2"><input value="Add Teaching Session" type="submit"><input type="button" onclick="history.back();" value="Back"></td>
 	</tr>
 	</table>
 </form:form>

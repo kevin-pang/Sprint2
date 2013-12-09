@@ -9,7 +9,6 @@
 </head>
 <body>
 	<h1>New Teaching Session</h1>
-	<a href="/login/">Logout</a>
 	<table>
 		<tfoot>
 			<tr>
@@ -57,5 +56,7 @@
 			<td>${ts.venue}</td>
 		</tr>
 	</table>
+	<br/><a href="/login/">Logout</a>
+	
 </body>
 </html>
