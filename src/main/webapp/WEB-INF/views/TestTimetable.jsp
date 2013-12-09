@@ -10,6 +10,7 @@
 <title>Timetable</title>
 </head>
 <body>
+<h1>Timetable Details</h1>
 <form:form method="POST" commandName="timetable" action="AddTeachingSession">
 	<table>
 		<tr>

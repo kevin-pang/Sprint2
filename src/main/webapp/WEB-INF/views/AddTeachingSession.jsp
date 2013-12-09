@@ -8,6 +8,7 @@
 <title>Add Teaching Session</title>
 </head>
 <body>
+<h1>Add Teaching Session</h1>
 	<form:form method="POST" commandName="tsh" action="AddSession2">
 	<table>
 		<tr>
